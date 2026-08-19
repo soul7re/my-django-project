@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Login | LaundryFlow{% endblock %}
+
+{% block content %}
+<section class="login-layout">
+  <div class="login-panel">
+    <div class="login-copy">
+      <img src="{% static 'images/washing-machine.svg' %}" alt="" class="login-image">
+      <h1>LaundryFlow</h1>
+      <p>Manage pickups, processing, payments, and deliveries from one clean workspace.</p>
+    </div>
+    <form method="post" class="card form-card">
+      {% csrf_token %}
+      <h2>Sign in</h2>
+      {% if form.non_field_errors %}
+        <div class="form-errors">{{ form.non_field_errors }}</div>
+      {% endif %}
+      <label for="{{ form.username.id_for_label }}">Username</label>
+      {{ form.username }}
+      <label for="{{ form.password.id_for_label }}">Password</label>
+      {{ form.password }}
+      <button type="submit" class="button button-primary">Login</button>
+    </form>
+  </div>
+</section>
+{% endblock %}
+

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load laundry_extras %}
+
+{% block title %}{{ laundryman.name }} | LaundryFlow{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>{{ laundryman.name }}</h1>
+    <p>{{ laundryman.phone_number }} - {% if laundryman.active %}Active{% else %}Inactive{% endif %}</p>
+  </div>
+  <div class="actions">
+    <a href="{% url 'laundryman_update' laundryman.pk %}" class="button">Edit</a>
+    {% if laundryman.active %}
+      <a href="{% url 'laundryman_deactivate' laundryman.pk %}" class="button button-danger">Deactivate</a>
+    {% endif %}
+  </div>
+</div>
+
+<section class="grid cards-3">
+  <div class="card metric"><span>Active orders</span><strong>{{ laundryman.active_orders_count }}</strong></div>
+  <div class="card metric"><span>Completed orders</span><strong>{{ laundryman.completed_orders_count }}</strong></div>
+  <div class="card metric"><span>Total items processed</span><strong>{{ laundryman.total_items_processed }}</strong></div>
+</section>
+
+<div class="card detail-card">
+  <h2>Laundryman Details</h2>
+  <dl class="detail-list">
+    <dt>Address</dt><dd>{{ laundryman.address }}</dd>
+    <dt>Registered</dt><dd>{{ laundryman.date_registered }}</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <div class="card-heading"><h2>Assigned Orders</h2></div>
+  {% if orders %}
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Order</th><th>Customer</th><th>Status</th><th>Items</th><th>Earnings</th></tr></thead>
+        <tbody>
+          {% for order in orders %}
+            <tr>
+              <td><a href="{{ order.get_absolute_url }}">{{ order.order_number }}</a></td>
+              <td>{{ order.customer.name }}</td>
+              <td><span class="badge {{ order.status|badge_class }}">{{ order.get_status_display }}</span></td>
+              <td>{{ order.total_items }}</td>
+              <td>{{ order.laundryman_amount|currency }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="muted">No assigned orders.</p>
+  {% endif %}
+</div>
+{% endblock %}

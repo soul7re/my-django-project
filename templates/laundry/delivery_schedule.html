@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static laundry_extras %}
+
+{% block title %}Delivery Schedule | LaundryFlow{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Delivery Schedule</h1>
+    <p>Customer deliveries for {{ selected_date }}.</p>
+  </div>
+</div>
+
+<form method="get" class="filters">
+  {{ form.date }}
+  <button type="submit" class="button">View Date</button>
+</form>
+
+<div class="card">
+  {% if orders %}
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Order</th><th>Customer</th><th>Phone</th><th>Address</th><th>Items</th><th>Payment</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          {% for order in orders %}
+            <tr>
+              <td><a href="{{ order.get_absolute_url }}">{{ order.order_number }}</a></td>
+              <td>{{ order.customer.name }}</td>
+              <td>{{ order.customer.phone_number }}</td>
+              <td>{{ order.customer.address }}</td>
+              <td>{{ order.total_items }}</td>
+              <td><span class="badge {{ order.payment_status|badge_class }}">{{ order.get_payment_status_display }}</span></td>
+              <td><span class="badge {{ order.status|badge_class }}">{{ order.get_status_display }}</span></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="empty-state">
+      <img src="{% static 'images/laundry-delivery.svg' %}" alt="">
+      <p>No deliveries scheduled for this date.</p>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
+

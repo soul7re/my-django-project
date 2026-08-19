@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="240" viewBox="0 0 360 240" role="img" aria-labelledby="title desc">
+  <title id="title">Clean clothes</title>
+  <desc id="desc">Fresh clothes hanging neatly on a rail.</desc>
+  <rect width="360" height="240" rx="24" fill="#f7fafc"/>
+  <ellipse cx="180" cy="194" rx="106" ry="17" fill="#d8e6ec"/>
+  <path d="M76 62h208" stroke="#5c7180" stroke-width="9" stroke-linecap="round"/>
+  <path d="M116 62v119M244 62v119" stroke="#9db1bc" stroke-width="9" stroke-linecap="round"/>
+  <path d="M131 79c0-12 10-22 22-22h10c8 0 15 5 18 12 3-7 10-12 18-12h10c12 0 22 10 22 22v84H131V79Z" fill="#56a9d3"/>
+  <path d="M163 57h36l-18 28-18-28Z" fill="#f7fafc"/>
+  <path d="M96 90c0-10 8-18 18-18h35v91H96V90Z" fill="#89c7a5"/>
+  <path d="M211 72h35c10 0 18 8 18 18v73h-53V72Z" fill="#f2b66d"/>
+  <path d="M141 98h80M141 121h80M106 108h33M221 108h33" stroke="#ffffff" stroke-opacity=".68" stroke-width="6" stroke-linecap="round"/>
+</svg>

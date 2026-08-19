@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="240" viewBox="0 0 360 240" role="img" aria-labelledby="title desc">
+  <title id="title">Laundry basket</title>
+  <desc id="desc">A simple laundry basket with clean clothes inside.</desc>
+  <rect width="360" height="240" rx="24" fill="#f7fafc"/>
+  <ellipse cx="180" cy="194" rx="104" ry="17" fill="#d8e6ec"/>
+  <path d="M99 92h162l-20 91H119L99 92Z" fill="#5c7180"/>
+  <path d="M112 107h136l-15 62H127l-15-62Z" fill="#7d96a6"/>
+  <path d="M120 122h120M125 142h110M143 107l10 62M180 107v62M217 107l-10 62" stroke="#eef5f7" stroke-width="6" stroke-linecap="round" opacity=".75"/>
+  <path d="M121 90c5-27 28-46 59-46s54 19 59 46" fill="none" stroke="#5c7180" stroke-width="12" stroke-linecap="round"/>
+  <path d="M130 91c4-20 22-35 50-35s46 15 50 35" fill="none" stroke="#f7fafc" stroke-width="5" stroke-linecap="round" opacity=".75"/>
+  <path d="M129 78c13-15 40-18 58-5 17-13 42-10 56 5" fill="none" stroke="#89c7a5" stroke-width="18" stroke-linecap="round"/>
+  <path d="M121 82c18-11 43-10 60 3" fill="none" stroke="#f2b66d" stroke-width="16" stroke-linecap="round"/>
+  <path d="M183 82c18-12 42-12 58-1" fill="none" stroke="#56a9d3" stroke-width="16" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Laundrymen | LaundryFlow{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Laundrymen</h1>
+    <p>Manage service providers and monitor workload.</p>
+  </div>
+  <a href="{% url 'laundryman_create' %}" class="button button-primary">Add Laundryman</a>
+</div>
+
+<form method="get" class="filters">
+  <input type="search" name="q" placeholder="Search laundrymen" value="{{ query }}">
+  <button type="submit" class="button">Search</button>
+</form>
+
+<div class="card">
+  {% if laundrymen %}
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Name</th><th>Phone</th><th>Status</th><th>Active Orders</th><th>Completed</th><th></th></tr>
+        </thead>
+        <tbody>
+          {% for laundryman in laundrymen %}
+            <tr>
+              <td><a href="{{ laundryman.get_absolute_url }}">{{ laundryman.name }}</a></td>
+              <td>{{ laundryman.phone_number }}</td>
+              <td>{% if laundryman.active %}<span class="badge badge-success">Active</span>{% else %}<span class="badge badge-muted">Inactive</span>{% endif %}</td>
+              <td>{{ laundryman.active_workload }}</td>
+              <td>{{ laundryman.completed_count }}</td>
+              <td class="row-actions"><a href="{% url 'laundryman_update' laundryman.pk %}">Edit</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="empty-state">
+      <img src="{% static 'images/laundry-delivery.svg' %}" alt="">
+      <p>No laundrymen found.</p>
+    </div>
+  {% endif %}
+</div>
+
+{% if laundrymen.has_other_pages %}
+  <div class="pagination">
+    {% if laundrymen.has_previous %}<a href="?page={{ laundrymen.previous_page_number }}&q={{ query }}">Previous</a>{% endif %}
+    <span>Page {{ laundrymen.number }} of {{ laundrymen.paginator.num_pages }}</span>
+    {% if laundrymen.has_next %}<a href="?page={{ laundrymen.next_page_number }}&q={{ query }}">Next</a>{% endif %}
+  </div>
+{% endif %}
+{% endblock %}
+

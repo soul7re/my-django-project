@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="240" viewBox="0 0 360 240" role="img" aria-labelledby="title desc">
+  <title id="title">Laundry delivery</title>
+  <desc id="desc">A small delivery van carrying laundry bags.</desc>
+  <rect width="360" height="240" rx="24" fill="#f7fafc"/>
+  <ellipse cx="180" cy="194" rx="116" ry="17" fill="#d8e6ec"/>
+  <path d="M85 102h147c15 0 28 12 28 28v43H85v-71Z" fill="#56a9d3"/>
+  <path d="M232 121h35l27 28v24h-62v-52Z" fill="#3a8fb7"/>
+  <path d="M246 131h18l16 16h-34v-16Z" fill="#d9edf4"/>
+  <rect x="105" y="119" width="64" height="35" rx="8" fill="#f7fafc" opacity=".9"/>
+  <path d="M123 145c9-13 22-13 31 0" fill="none" stroke="#89c7a5" stroke-width="9" stroke-linecap="round"/>
+  <path d="M112 143h51v18h-51v-18Z" fill="#89c7a5"/>
+  <circle cx="122" cy="176" r="17" fill="#5c7180"/>
+  <circle cx="122" cy="176" r="7" fill="#f7fafc"/>
+  <circle cx="259" cy="176" r="17" fill="#5c7180"/>
+  <circle cx="259" cy="176" r="7" fill="#f7fafc"/>
+  <path d="M186 83c6-18 36-18 42 0l11 39h-64l11-39Z" fill="#f2b66d"/>
+  <path d="M191 82c9 7 25 7 33 0" fill="none" stroke="#f7fafc" stroke-width="7" stroke-linecap="round" opacity=".85"/>
+</svg>

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static laundry_extras %}
+
+{% block title %}Processing Schedule | LaundryFlow{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Processing Schedule</h1>
+    <p>Orders currently with laundrymen or ready for collection.</p>
+  </div>
+</div>
+
+<div class="card">
+  {% if orders %}
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Order</th><th>Laundryman</th><th>Customer</th><th>Date Sent</th>
+            <th>Expected Completion</th><th>Status</th><th>Items</th><th>Priority</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in orders %}
+            <tr>
+              <td><a href="{{ order.get_absolute_url }}">{{ order.order_number }}</a></td>
+              <td>{{ order.laundryman.name|default:"Unassigned" }}</td>
+              <td>{{ order.customer.name }}</td>
+              <td>{{ order.date_sent_to_laundry|default:"-" }}</td>
+              <td>{{ order.expected_completion_date|default:"-" }}</td>
+              <td><span class="badge {{ order.status|badge_class }}">{{ order.get_status_display }}</span></td>
+              <td>{{ order.total_items }}</td>
+              <td><span class="badge {{ order.priority|badge_class }}">{{ order.get_priority_display }}</span></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="empty-state">
+      <img src="{% static 'images/washing-machine.svg' %}" alt="">
+      <p>No orders are currently in laundry processing.</p>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
