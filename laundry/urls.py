@@ -4,7 +4,10 @@ from . import views
 
 
 urlpatterns = [
+<<<<<<< HEAD
     path("accounts/signup/", views.signup, name="signup"),
+=======
+>>>>>>> 2f20640c450899b6138ad449cd4f9ca0a9073be9
     path("", views.dashboard, name="dashboard"),
     path("customers/", views.customer_list, name="customer_list"),
     path("customers/add/", views.customer_create, name="customer_create"),

@@ -2,6 +2,10 @@
 from pathlib import Path
 import os
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2f20640c450899b6138ad449cd4f9ca0a9073be9
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -80,6 +84,10 @@ DATABASES = {
     }
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2f20640c450899b6138ad449cd4f9ca0a9073be9
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
