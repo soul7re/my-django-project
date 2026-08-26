@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ title }} | LaundryFlow{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>{{ title }}</h1>
+    <p>Add schedule details and clothing items. Totals are calculated after saving.</p>
+  </div>
+</div>
+
+<form method="post" class="card form-card order-form">
+  {% csrf_token %}
+  {% if form.non_field_errors %}
+    <div class="form-errors">{{ form.non_field_errors }}</div>
+  {% endif %}
+
+  <div class="form-grid">
+    {% for field in form %}
+      <div class="field">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        {% if field.help_text %}<small>{{ field.help_text }}</small>{% endif %}
+        {% for error in field.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <h2>Clothing Items</h2>
+  {{ formset.management_form }}
+  {% if formset.non_form_errors %}
+    <div class="form-errors">{{ formset.non_form_errors }}</div>
+  {% endif %}
+  <div class="item-formset" data-formset-prefix="{{ formset.prefix }}">
+    {% for item_form in formset.forms %}
+      <div class="item-row">
+        {% for hidden in item_form.hidden_fields %}{{ hidden }}{% endfor %}
+        <div class="field">
+          <label>{{ item_form.clothing_type.label }}</label>
+          {{ item_form.clothing_type }}
+          {% for error in item_form.clothing_type.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+        </div>
+        <div class="field">
+          <label>{{ item_form.quantity.label }}</label>
+          {{ item_form.quantity }}
+          {% for error in item_form.quantity.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+        </div>
+        <div class="field item-description">
+          <label>{{ item_form.description.label }}</label>
+          {{ item_form.description }}
+        </div>
+        {% if item_form.DELETE %}
+          <label class="check-field">{{ item_form.DELETE }} Remove</label>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <template id="empty-item-form">
+    <div class="item-row">
+      {% for hidden in formset.empty_form.hidden_fields %}{{ hidden }}{% endfor %}
+      <div class="field">
+        <label>{{ formset.empty_form.clothing_type.label }}</label>
+        {{ formset.empty_form.clothing_type }}
+      </div>
+      <div class="field">
+        <label>{{ formset.empty_form.quantity.label }}</label>
+        {{ formset.empty_form.quantity }}
+      </div>
+      <div class="field item-description">
+        <label>{{ formset.empty_form.description.label }}</label>
+        {{ formset.empty_form.description }}
+      </div>
+    </div>
+  </template>
+
+  <div class="actions">
+    <button type="button" class="button" data-add-item>Add Item</button>
+    <button type="submit" class="button button-primary">Save Order</button>
+    <a href="{% url 'order_list' %}" class="button">Cancel</a>
+  </div>
+</form>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{% static 'js/order-form.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static laundry_extras %}
+
+{% block title %}Dashboard | LaundryFlow{% endblock %}
+
+{% block content %}
+<section class="dashboard-hero">
+  <div>
+    <h1>Dashboard</h1>
+    <p>Today's pickups, deliveries, priority work, and financial summary.</p>
+  </div>
+  <img src="{% static 'images/laundry-folded-clothes.svg' %}" alt="" class="hero-image">
+</section>
+
+<section class="grid cards-5">
+  <div class="card metric"><span>Today's pickups</span><strong>{{ stats.today_pickups }}</strong></div>
+  <div class="card metric"><span>Today's deliveries</span><strong>{{ stats.today_deliveries }}</strong></div>
+  <div class="card metric"><span>Pending</span><strong>{{ stats.pending_orders }}</strong></div>
+  <div class="card metric"><span>Processing</span><strong>{{ stats.processing_orders }}</strong></div>
+  <div class="card metric"><span>Ready</span><strong>{{ stats.ready_orders }}</strong></div>
+</section>
+
+<section class="grid cards-3">
+  <div class="card metric"><span>Total revenue</span><strong>{{ stats.total_revenue|currency }}</strong></div>
+  <div class="card metric"><span>Commission</span><strong>{{ stats.total_commission|currency }}</strong></div>
+  <div class="card metric"><span>Outstanding</span><strong>{{ stats.outstanding_balances|currency }}</strong></div>
+  <div class="card metric"><span>Laundrymen earnings</span><strong>{{ stats.laundrymen_earnings|currency }}</strong></div>
+  <div class="card metric"><span>Amount paid</span><strong>{{ stats.total_paid|currency }}</strong></div>
+  <div class="card metric"><span>Total orders</span><strong>{{ stats.total_orders }}</strong></div>
+</section>
+
+<section class="grid split">
+  <div class="card">
+    <div class="card-heading">
+      <h2>Priority Queue</h2>
+      <a href="{% url 'order_list' %}">View all</a>
+    </div>
+    {% if priority_orders %}
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Order</th><th>Customer</th><th>Priority</th><th>Delivery</th></tr>
+          </thead>
+          <tbody>
+            {% for order in priority_orders %}
+              <tr>
+                <td><a href="{{ order.get_absolute_url }}">{{ order.order_number }}</a></td>
+                <td>{{ order.customer.name }}</td>
+                <td><span class="badge {{ order.priority|badge_class }}">{{ order.get_priority_display }}</span></td>
+                <td>{{ order.delivery_date|default:"Not set" }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <div class="empty-state">
+        <img src="{% static 'images/clean-clothes.svg' %}" alt="">
+        <p>No active priority orders.</p>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="card">
+    <div class="card-heading">
+      <h2>Today's Operations</h2>
+      <a href="{% url 'pickup_schedule' %}">Schedules</a>
+    </div>
+    <h3>Pickups</h3>
+    {% if today_pickups %}
+      <ul class="compact-list">
+        {% for order in today_pickups %}
+          <li><a href="{{ order.get_absolute_url }}">{{ order.order_number }}</a> - {{ order.customer.name }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="muted">No pickups scheduled today.</p>
+    {% endif %}
+    <h3>Deliveries</h3>
+    {% if today_deliveries %}
+      <ul class="compact-list">
+        {% for order in today_deliveries %}
+          <li><a href="{{ order.get_absolute_url }}">{{ order.order_number }}</a> - {{ order.customer.name }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="muted">No deliveries scheduled today.</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
+

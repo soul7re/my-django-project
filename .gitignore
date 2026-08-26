@@ -1,0 +1,14 @@
+.env
+*.pyc
+__pycache__/
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+db.sqlite3
+staticfiles/
+media/
+Microsoft/
+server.log
+server.err

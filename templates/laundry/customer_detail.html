@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load laundry_extras %}
+
+{% block title %}{{ customer.name }} | LaundryFlow{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>{{ customer.name }}</h1>
+    <p>{{ customer.phone_number }}{% if customer.email %} - {{ customer.email }}{% endif %}</p>
+  </div>
+  <div class="actions">
+    <a href="{% url 'customer_update' customer.pk %}" class="button">Edit</a>
+    <a href="{% url 'order_create' %}" class="button button-primary">New Order</a>
+  </div>
+</div>
+
+<section class="grid cards-3">
+  <div class="card metric"><span>Total orders</span><strong>{{ orders.count }}</strong></div>
+  <div class="card metric"><span>Total spent</span><strong>{{ customer.total_spent|currency }}</strong></div>
+  <div class="card metric"><span>Outstanding</span><strong>{{ customer.outstanding_balance|currency }}</strong></div>
+</section>
+
+<div class="card detail-card">
+  <h2>Customer Details</h2>
+  <dl class="detail-list">
+    <dt>Address</dt><dd>{{ customer.address }}</dd>
+    <dt>Notes</dt><dd>{{ customer.notes|default:"-" }}</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <div class="card-heading"><h2>Order History</h2></div>
+  {% if orders %}
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Order</th><th>Status</th><th>Payment</th><th>Total</th><th>Delivery</th></tr></thead>
+        <tbody>
+          {% for order in orders %}
+            <tr>
+              <td><a href="{{ order.get_absolute_url }}">{{ order.order_number }}</a></td>
+              <td><span class="badge {{ order.status|badge_class }}">{{ order.get_status_display }}</span></td>
+              <td><span class="badge {{ order.payment_status|badge_class }}">{{ order.get_payment_status_display }}</span></td>
+              <td>{{ order.total_amount|currency }}</td>
+              <td>{{ order.delivery_date|default:"-" }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="muted">No orders yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

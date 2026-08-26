@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static laundry_extras %}
+
+{% block title %}Pickup Schedule | LaundryFlow{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Pickup Schedule</h1>
+    <p>Customer pickups for {{ selected_date }}.</p>
+  </div>
+  <a href="{% url 'order_create' %}" class="button button-primary">Schedule Pickup</a>
+</div>
+
+<form method="get" class="filters">
+  {{ form.date }}
+  <button type="submit" class="button">View Date</button>
+</form>
+
+<div class="card">
+  {% if orders %}
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Order</th><th>Customer</th><th>Phone</th><th>Address</th><th>Items</th><th>Status</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          {% for order in orders %}
+            <tr>
+              <td><a href="{{ order.get_absolute_url }}">{{ order.order_number }}</a></td>
+              <td>{{ order.customer.name }}</td>
+              <td>{{ order.customer.phone_number }}</td>
+              <td>{{ order.customer.address }}</td>
+              <td>{{ order.total_items }}</td>
+              <td><span class="badge {{ order.status|badge_class }}">{{ order.get_status_display }}</span></td>
+              <td>{{ order.notes|default:"-" }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="empty-state">
+      <img src="{% static 'images/laundry-basket.svg' %}" alt="">
+      <p>No pickups scheduled for this date.</p>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
+

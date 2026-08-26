@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load laundry_extras %}
+
+{% block title %}Reports | LaundryFlow{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Reports</h1>
+    <p>Review order volume, revenue, commissions, and balances.</p>
+  </div>
+</div>
+
+<form method="get" class="filters">
+  <div class="field inline-field">
+    <label for="{{ form.start_date.id_for_label }}">Start date</label>
+    {{ form.start_date }}
+  </div>
+  <div class="field inline-field">
+    <label for="{{ form.end_date.id_for_label }}">End date</label>
+    {{ form.end_date }}
+  </div>
+  <button type="submit" class="button">Apply</button>
+</form>
+
+<section class="grid cards-3">
+  <div class="card metric"><span>Total orders</span><strong>{{ report.total_orders }}</strong></div>
+  <div class="card metric"><span>Total clothes</span><strong>{{ report.total_clothes }}</strong></div>
+  <div class="card metric"><span>Customer revenue</span><strong>{{ report.total_revenue|currency }}</strong></div>
+  <div class="card metric"><span>Commission earned</span><strong>{{ report.total_commission|currency }}</strong></div>
+  <div class="card metric"><span>Laundrymen earnings</span><strong>{{ report.laundrymen_earnings|currency }}</strong></div>
+  <div class="card metric"><span>Payments received</span><strong>{{ report.total_paid|currency }}</strong></div>
+  <div class="card metric"><span>Outstanding balances</span><strong>{{ report.outstanding_balances|currency }}</strong></div>
+</section>
+
+<div class="card detail-card">
+  <h2>Calculation Rules</h2>
+  <p>Customer bill = number of items x price per item.</p>
+  <p>Commission = number of items x commission per item.</p>
+  <p>Laundryman earnings = customer bill - commission.</p>
+  <p>Balance = customer bill - amount paid.</p>
+</div>
+{% endblock %}

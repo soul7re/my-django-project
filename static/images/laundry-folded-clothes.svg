@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="240" viewBox="0 0 360 240" role="img" aria-labelledby="title desc">
+  <title id="title">Folded clothes</title>
+  <desc id="desc">A small stack of neatly folded clean clothes.</desc>
+  <rect width="360" height="240" rx="24" fill="#f7fafc"/>
+  <ellipse cx="180" cy="190" rx="112" ry="18" fill="#d8e6ec"/>
+  <rect x="92" y="122" width="176" height="48" rx="10" fill="#3a8fb7"/>
+  <path d="M116 122h128c13 0 24 11 24 24v6H92v-6c0-13 11-24 24-24Z" fill="#56a9d3"/>
+  <rect x="104" y="84" width="152" height="46" rx="9" fill="#f2b66d"/>
+  <path d="M128 84h104c13 0 24 11 24 24v5H104v-5c0-13 11-24 24-24Z" fill="#f6ca8f"/>
+  <rect x="119" y="49" width="122" height="43" rx="9" fill="#89c7a5"/>
+  <path d="M142 49h75c13 0 24 11 24 24v4H119v-4c0-13 11-24 23-24Z" fill="#a6d7ba"/>
+  <path d="M128 63h77" stroke="#ffffff" stroke-opacity=".7" stroke-width="6" stroke-linecap="round"/>
+  <path d="M113 101h96" stroke="#ffffff" stroke-opacity=".65" stroke-width="6" stroke-linecap="round"/>
+  <path d="M104 141h116" stroke="#ffffff" stroke-opacity=".6" stroke-width="6" stroke-linecap="round"/>
+</svg>

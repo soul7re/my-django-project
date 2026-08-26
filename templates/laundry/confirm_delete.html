@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} | LaundryFlow{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>{{ title }}</h1>
+    <p>Please confirm this action.</p>
+  </div>
+</div>
+
+<form method="post" class="card form-card">
+  {% csrf_token %}
+  <p>Are you sure you want to continue with <strong>{{ object }}</strong>?</p>
+  <div class="actions">
+    <button type="submit" class="button button-danger">{{ action_label|default:"Delete" }}</button>
+    <a href="{{ request.META.HTTP_REFERER|default:'/' }}" class="button">Cancel</a>
+  </div>
+</form>
+{% endblock %}

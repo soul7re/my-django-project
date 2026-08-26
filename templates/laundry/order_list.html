@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static laundry_extras %}
+
+{% block title %}Orders | LaundryFlow{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Orders</h1>
+    <p>Search, filter, and track the full laundry workflow.</p>
+  </div>
+  <a href="{% url 'order_create' %}" class="button button-primary">Add Order</a>
+</div>
+
+<form method="get" class="filters filters-grid">
+  <input type="search" name="q" placeholder="Order, customer, or laundryman" value="{{ query }}">
+  <select name="status">
+    <option value="">All statuses</option>
+    {% for value, label in status_choices %}
+      <option value="{{ value }}" {% if filters.status == value %}selected{% endif %}>{{ label }}</option>
+    {% endfor %}
+  </select>
+  <select name="payment_status">
+    <option value="">All payments</option>
+    {% for value, label in payment_choices %}
+      <option value="{{ value }}" {% if filters.payment_status == value %}selected{% endif %}>{{ label }}</option>
+    {% endfor %}
+  </select>
+  <select name="priority">
+    <option value="">All priorities</option>
+    {% for value, label in priority_choices %}
+      <option value="{{ value }}" {% if filters.priority == value %}selected{% endif %}>{{ label }}</option>
+    {% endfor %}
+  </select>
+  <input type="date" name="pickup_date" value="{{ filters.pickup_date }}">
+  <input type="date" name="delivery_date" value="{{ filters.delivery_date }}">
+  <button type="submit" class="button">Filter</button>
+</form>
+
+<div class="card">
+  {% if orders %}
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Order</th><th>Customer</th><th>Laundryman</th><th>Status</th>
+            <th>Priority</th><th>Payment</th><th>Total</th><th>Delivery</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in orders %}
+            <tr>
+              <td><a href="{{ order.get_absolute_url }}">{{ order.order_number }}</a></td>
+              <td>{{ order.customer.name }}</td>
+              <td>{{ order.laundryman.name|default:"Unassigned" }}</td>
+              <td><span class="badge {{ order.status|badge_class }}">{{ order.get_status_display }}</span></td>
+              <td><span class="badge {{ order.priority|badge_class }}">{{ order.get_priority_display }}</span></td>
+              <td><span class="badge {{ order.payment_status|badge_class }}">{{ order.get_payment_status_display }}</span></td>
+              <td>{{ order.total_amount|currency }}</td>
+              <td>{{ order.delivery_date|default:"-" }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="empty-state">
+      <img src="{% static 'images/laundry-basket.svg' %}" alt="">
+      <p>No orders match the current filters.</p>
+    </div>
+  {% endif %}
+</div>
+
+{% if orders.has_other_pages %}
+  <div class="pagination">
+    {% if orders.has_previous %}<a href="?q={{ query }}&status={{ filters.status }}&payment_status={{ filters.payment_status }}&priority={{ filters.priority }}&pickup_date={{ filters.pickup_date }}&delivery_date={{ filters.delivery_date }}&page={{ orders.previous_page_number }}">Previous</a>{% endif %}
+    <span>Page {{ orders.number }} of {{ orders.paginator.num_pages }}</span>
+    {% if orders.has_next %}<a href="?q={{ query }}&status={{ filters.status }}&payment_status={{ filters.payment_status }}&priority={{ filters.priority }}&pickup_date={{ filters.pickup_date }}&delivery_date={{ filters.delivery_date }}&page={{ orders.next_page_number }}">Next</a>{% endif %}
+  </div>
+{% endif %}
+{% endblock %}

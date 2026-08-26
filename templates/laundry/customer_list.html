@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static laundry_extras %}
+
+{% block title %}Customers | LaundryFlow{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Customers</h1>
+    <p>Search, add, and review customer order history.</p>
+  </div>
+  <a href="{% url 'customer_create' %}" class="button button-primary">Add Customer</a>
+</div>
+
+<form method="get" class="filters">
+  <input type="search" name="q" placeholder="Search customers" value="{{ query }}">
+  <button type="submit" class="button">Search</button>
+</form>
+
+<div class="card">
+  {% if customers %}
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Name</th><th>Phone</th><th>Email</th><th>Orders</th><th></th></tr>
+        </thead>
+        <tbody>
+          {% for customer in customers %}
+            <tr>
+              <td><a href="{{ customer.get_absolute_url }}">{{ customer.name }}</a></td>
+              <td>{{ customer.phone_number }}</td>
+              <td>{{ customer.email|default:"-" }}</td>
+              <td>{{ customer.order_count }}</td>
+              <td class="row-actions"><a href="{% url 'customer_update' customer.pk %}">Edit</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="empty-state">
+      <img src="{% static 'images/laundry-basket.svg' %}" alt="">
+      <p>No customers found.</p>
+    </div>
+  {% endif %}
+</div>
+
+{% if customers.has_other_pages %}
+  <div class="pagination">
+    {% if customers.has_previous %}<a href="?page={{ customers.previous_page_number }}&q={{ query }}">Previous</a>{% endif %}
+    <span>Page {{ customers.number }} of {{ customers.paginator.num_pages }}</span>
+    {% if customers.has_next %}<a href="?page={{ customers.next_page_number }}&q={{ query }}">Next</a>{% endif %}
+  </div>
+{% endif %}
+{% endblock %}
+
