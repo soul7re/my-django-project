@@ -1,10 +1,8 @@
-<<<<<<< HEAD
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
-=======
->>>>>>> 2f20640c450899b6138ad449cd4f9ca0a9073be9
+
 from decimal import Decimal
 
 from django.contrib import messages
@@ -442,7 +440,6 @@ def business_settings(request):
         messages.success(request, "Business settings updated successfully.")
         return redirect("business_settings")
     return render(request, "laundry/form.html", {"form": form, "title": "Business Settings"})
-<<<<<<< HEAD
 def signup(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
@@ -454,5 +451,4 @@ def signup(request):
         form = UserCreationForm()
 
     return render(request, "registration/signup.html", {"form": form})
-=======
->>>>>>> 2f20640c450899b6138ad449cd4f9ca0a9073be9
+

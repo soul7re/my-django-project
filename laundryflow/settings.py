@@ -2,10 +2,7 @@
 from pathlib import Path
 import os
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 2f20640c450899b6138ad449cd4f9ca0a9073be9
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -76,18 +73,16 @@ WSGI_APPLICATION = "laundryflow.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DB_NAME", "laundryflow"),
-        "USER": os.getenv("DB_USER", "postgres"),
-        "PASSWORD": os.getenv("DB_PASSWORD", ""),
-        "HOST": os.getenv("DB_HOST", "localhost"),
+        "NAME": os.getenv("DB_NAME", "laundryflow_rqzq"),
+        "USER": os.getenv("DB_USER", "laundryflow_rqzq_user"),
+        "PASSWORD": os.getenv("DB_PASSWORD"),
+        "HOST": os.getenv("DB_HOST", "dpg-da6r2v2d0e5s73dg7jeg-a"),
         "PORT": os.getenv("DB_PORT", "5432"),
     }
 }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 2f20640c450899b6138ad449cd4f9ca0a9073be9
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
