@@ -1,26 +1,200 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
+
+    <title>Create Account | LaundryFlow</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #eef6ff, #f8fbff);
+            padding: 20px;
+        }
+
+        .signup-container {
+            width: 100%;
+            max-width: 430px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo h1 {
+            color: #1769aa;
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .logo p {
+            color: #6b7280;
+            margin-top: 6px;
+            font-size: 14px;
+        }
+
+        .signup-card {
+            background: #ffffff;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+        }
+
+        .signup-card h2 {
+            text-align: center;
+            color: #1f2937;
+            margin-bottom: 8px;
+            font-size: 25px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        form p {
+            margin-bottom: 18px;
+        }
+
+        form label {
+            display: block;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        form input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        form input:focus {
+            border-color: #1769aa;
+            box-shadow: 0 0 0 3px rgba(23, 105, 170, 0.12);
+        }
+
+        form ul {
+            margin-top: 6px;
+            padding-left: 20px;
+            color: #6b7280;
+            font-size: 12px;
+        }
+
+        .signup-button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #1769aa;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 5px;
+            transition: 0.2s;
+        }
+
+        .signup-button:hover {
+            background: #12578c;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 22px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .login-link a {
+            color: #1769aa;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 18px;
+            color: #9ca3af;
+            font-size: 12px;
+        }
+
+        @media (max-width: 480px) {
+            .signup-card {
+                padding: 25px 20px;
+            }
+
+            .logo h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-    <h2>Create Account</h2>
+    <div class="signup-container">
 
-    <form method="post">
-        {% csrf_token %}
+        <div class="logo">
+            <h1>LaundryFlow</h1>
+            <p>Simple. Reliable. Fresh.</p>
+        </div>
 
-        {{ form.as_p }}
+        <div class="signup-card">
 
-        <button type="submit">Sign Up</button>
-    </form>
+            <h2>Create Your Account</h2>
 
-    <p>
-        Already have an account?
-        <a href="{% url 'login' %}">Login</a>
-    </p>
+            <p class="subtitle">
+                Sign up to manage your laundry with ease.
+            </p>
+
+            <form method="post">
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                <button type="submit" class="signup-button">
+                    Create Account
+                </button>
+            </form>
+
+            <p class="login-link">
+                Already have an account?
+                <a href="{% url 'login' %}">Log in</a>
+            </p>
+
+        </div>
+
+        <p class="footer">
+            © 2026 LaundryFlow. All rights reserved.
+        </p>
+
+    </div>
 
 </body>
 </html>
+```
